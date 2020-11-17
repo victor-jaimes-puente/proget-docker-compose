@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: proget-sql
+    restart: unless-stopped
+    ports:
+      - "1433:1433"
+    networks:
+      proget-network:
+        aliases:
+          - proget-sql
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: dapper123
+      MSSQL_PID: Express
+# Optional if using persisted storage locations 
+(https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-configure?view=sql-server-ver15&pivots=cs1-bash#persist)
+#    volumes:
+#      - /proget-sql/data:/var/opt/mssql/data
+#      - /proget-sql/log:/var/opt/mssql/log
+#      - /proget-sql/secrets:/var/opt/mssql/secrets
+  pg:
+    image: proget.inedo.com/productimages/inedo/proget:5.3.10
+    container_name: proget
+    restart: unless-stopped
+    environment: 
+      SQL_CONNECTION_STRING: Data Source=proget-sql; Initial Catalog=ProGet; User ID=sa; 
+Password="dapper123"
+    ports:
+      - "80:80"
+    networks:
+      proget-network:
+        aliases:
+          - proget
+# Update this path to persist your proget packages storage
+    volumes:
+      - ./proget-packages:/var/proget/packages
+    depends_on:
+      - db
+networks:
+  proget-network:
+    name: proget-network
