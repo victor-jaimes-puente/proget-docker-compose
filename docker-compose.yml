@@ -24,7 +24,7 @@ services:
     container_name: proget
     restart: unless-stopped
     environment: 
-      SQL_CONNECTION_STRING: Data Source=proget-sql; Initial Catalog=ProGet; User ID=sa; Password="dapper123"
+      SQL_CONNECTION_STRING: Data Source=proget-sql; Initial Catalog=ProGet; User ID=sa; Password="dapper1234"
     ports:
       - "80:80"
     networks:
