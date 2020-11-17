@@ -15,7 +15,7 @@ services:
       MSSQL_SA_PASSWORD: dapper123
       MSSQL_PID: Express
 # Optional if using persisted storage locations 
-(https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-configure?view=sql-server-ver15&pivots=cs1-bash#persist)
+# (https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-docker-container-configure?view=sql-server-ver15&pivots=cs1-bash#persist)
 #    volumes:
 #      - /proget-sql/data:/var/opt/mssql/data
 #      - /proget-sql/log:/var/opt/mssql/log
