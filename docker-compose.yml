@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 services:
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -36,6 +36,6 @@ services:
       - ./proget-packages:/var/proget/packages
     depends_on:
       - db
-networks:
-  proget-network:
-    name: proget-network
+  networks:
+    proget-network:
+      name: proget-network
